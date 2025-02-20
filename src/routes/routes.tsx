@@ -4,6 +4,8 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import CreateStudent from "../pages/admin/CreateStudent";
 
 const router = createBrowserRouter([
   {
@@ -11,12 +13,30 @@ const router = createBrowserRouter([
     element: <App></App>,
     children: [
       {
-        path: "/about",
+        path: "about",
         element: <About></About>,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact></Contact>,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <App></App>,
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "dashboard",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "create-student",
+        element: <CreateStudent></CreateStudent>,
       },
     ],
   },
