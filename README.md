@@ -48,4 +48,3 @@ export default tseslint.config({
   },
 })
 ```
-# PH-University-Frontend
