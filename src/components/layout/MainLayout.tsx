@@ -4,6 +4,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import { createElement } from "react";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -14,7 +15,7 @@ const items = [
   UserOutlined,
 ].map((icon, index) => ({
   key: String(index + 1),
-  icon: React.createElement(icon),
+  icon: createElement(icon),
   label: `nav ${index + 1}`,
 }));
 
@@ -40,17 +41,15 @@ const MainLayout = () => {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ padding: 0 }} />
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
               padding: 24,
               minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
             }}
           >
-            content
+            <h1>The main content should go here</h1>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
