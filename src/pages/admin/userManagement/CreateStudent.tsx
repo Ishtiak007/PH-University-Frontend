@@ -1,7 +1,7 @@
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constants/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
@@ -11,76 +11,80 @@ import {
 } from "../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 
-// const studentDummyData = {
-//   password: "student123",
-//   student: {
-//     name: {
-//       firstName: "I am ",
-//       middleName: "Student",
-//       lastName: "Number 1",
-//     },
-//     gender: "male",
-//     dateOfBirth: "1990-01-01",
-//     bloodGroup: "A+",
+const studentDummyData = {
+  password: "student123",
+  student: {
+    name: {
+      firstName: "I am ",
+      middleName: "Student",
+      lastName: "Number 1",
+    },
+    gender: "male",
+    dateOfBirth: "1990-01-01",
+    bloodGroup: "A+",
 
-//     email: "student3@gmail.com",
-//     contactNo: "1235678",
-//     emergencyContactNumber: "987-654-3210",
-//     presentAddress: "123 Main St, Cityville",
-//     permanentAddress: "456 Oak St, Townsville",
+    email: "student3@gmail.com",
+    contactNo: "1235678900",
+    emergencyContactNo: "987-654-3210",
+    presentAddress: "123 Main St, Cityville",
+    permanentAddress: "456 Oak St, Townsville",
 
-//     guardian: {
-//       fatherName: "James Doe",
-//       fatherOccupation: "Engineer",
-//       fatherContactNo: "111-222-3333",
-//       motherName: "Mary Doe",
-//       motherOccupation: "Teacher",
-//       motherContactNo: "444-555-6666",
-//     },
+    guardian: {
+      fatherName: "James Doe",
+      fatherOccupation: "Engineer",
+      fatherContactNo: "111-222-3333",
+      motherName: "Mary Doe",
+      motherOccupation: "Teacher",
+      motherContactNo: "444-555-6666",
+    },
 
-//     localGuardian: {
-//       name: "Alice Johnson",
-//       occupation: "Doctor",
-//       contactNo: "777-888-9999",
-//       address: "789 Pine St, Villageton",
-//     },
+    localGuardian: {
+      name: "Alice Johnson",
+      occupation: "Doctor",
+      contactNo: "777-888-9999",
+      address: "789 Pine St, Villageton",
+    },
 
-//     admissionSemester: "65bb60ebf71fdd1add63b1c0",
-//     academicDepartment: "65b4acae3dc8d4f3ad83e416",
-//   },
-// };
+    admissionSemester: "65bb60ebf71fdd1add63b1c0",
+    academicDepartment: "65b4acae3dc8d4f3ad83e416",
+  },
+};
 
 //! This is only for development
 //! Should be removed
 const studentDefaultValues = {
   name: {
-    firstName: "Alu",
-    middleName: "Binte",
-    lastName: "Alim",
+    firstName: "Iam ",
+    middleName: "Student",
+    lastName: "Number",
   },
   gender: "male",
-  email: "a@gmail.com",
-  contactNo: "01737223970",
-  emergencyContactNumber: "01853196899",
+
   bloodGroup: "A+",
+  email: "shoshi@gmail.com",
+  contactNo: "1235678489",
+  emergencyContactNumber: "9876543210",
   presentAddress: "123 Main St, Cityville",
   permanentAddress: "456 Oak St, Townsville",
+
   guardian: {
     fatherName: "James Doe",
     fatherOccupation: "Engineer",
-    fatherContactNo: "01700000003",
+    fatherContactNo: "111-222-3333",
     motherName: "Mary Doe",
     motherOccupation: "Teacher",
-    motherContactNo: "01700000004",
+    motherContactNo: "444-555-6666",
   },
+
   localGuardian: {
     name: "Alice Johnson",
     occupation: "Doctor",
-    contactNo: "01700000004",
+    contactNo: "777-888-9999",
     address: "789 Pine St, Villageton",
   },
-  admissionSemester: "67bd59b31672a2ba72cc60e2",
-  academicDepartment: "67b030d211a107ca05d1d056",
+
+  admissionSemester: "65bb60ebf71fdd1add63b1c0",
+  academicDepartment: "65b4acae3dc8d4f3ad83e416",
 };
 
 const CreateStudent = () => {
@@ -113,11 +117,13 @@ const CreateStudent = () => {
     const formData = new FormData();
 
     formData.append("data", JSON.stringify(studentData));
-    // formData.append("file", data.image);
+    formData.append("file", data.image);
 
     addStudent(formData);
 
-    // console.log(Object.fromEntries(formData));
+    //! This is for development
+    //! Just for checking
+    console.log(Object.fromEntries(formData));
   };
 
   return (
@@ -148,7 +154,7 @@ const CreateStudent = () => {
                 label="Blood group"
               />
             </Col>
-            {/* <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <Controller
                 name="image"
                 render={({ field: { onChange, value, ...field } }) => (
@@ -162,7 +168,7 @@ const CreateStudent = () => {
                   </Form.Item>
                 )}
               />
-            </Col> */}
+            </Col>
           </Row>
           <Divider>Contact Info.</Divider>
           <Row gutter={8}>
