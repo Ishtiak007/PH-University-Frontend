@@ -51,5 +51,8 @@ const academicManagementApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllSemestersQuery, useAddAcademicSemestersMutation } =
-  academicManagementApi;
+export const {
+  useGetAllSemestersQuery,
+  useAddAcademicSemestersMutation,
+  useGetAcademicDepartmentsQuery,
+} = academicManagementApi;

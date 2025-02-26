@@ -5,7 +5,10 @@ import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constants/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
-import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
+import {
+  useGetAcademicDepartmentsQuery,
+  useGetAllSemestersQuery,
+} from "../../../redux/features/admin/academicManagement.api";
 
 const studentDummyData = {
   password: "student123",
@@ -80,9 +83,17 @@ const studentDefaultValues = {
 const CreateStudent = () => {
   const { data: sData, isLoading: sIsLoading } =
     useGetAllSemestersQuery(undefined);
+  const { data: dData, isLoading: dIsLoading } =
+    useGetAcademicDepartmentsQuery(undefined);
+
   const semesterOptions = sData?.data?.map((item) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
+  }));
+
+  const departmentOptions = dData?.data?.map((item) => ({
+    value: item._id,
+    label: item.name,
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
