@@ -54,14 +54,14 @@ const studentDummyData = {
 //! Should be removed
 const studentDefaultValues = {
   name: {
-    firstName: "Iam ",
-    middleName: "Student",
-    lastName: "Number",
+    firstName: "Iamm",
+    middleName: "Studentt",
+    lastName: "Numberr",
   },
   gender: "male",
 
   bloodGroup: "A+",
-  email: "shoshi@gmail.com",
+  email: "yeahoo@gmail.com",
   contactNo: "1235678489",
   emergencyContactNumber: "9876543210",
   presentAddress: "123 Main St, Cityville",
