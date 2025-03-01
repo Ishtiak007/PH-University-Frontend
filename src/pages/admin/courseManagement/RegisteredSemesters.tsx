@@ -1,9 +1,11 @@
 import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
+import moment from "moment";
+import { useState } from "react";
 import {
   useGetAllRegisteredSemestersQuery,
   useUpdateRegisteredSemesterMutation,
-} from "../../../redux/features/admin/courseManagement";
-import { useState } from "react";
+} from "../../../redux/features/admin/courseManagement.api";
+import { TSemester } from "../../../types/courseManagement.type";
 export type TTableData = Pick<TSemester, "startDate" | "endDate" | "status">;
 
 const items = [
@@ -22,7 +24,6 @@ const items = [
 ];
 
 const RegisteredSemesters = () => {
-  // const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
   const [semesterId, setSemesterId] = useState("");
   const { data: semesterData, isFetching } =
     useGetAllRegisteredSemestersQuery(undefined);
@@ -41,7 +42,7 @@ const RegisteredSemesters = () => {
     })
   );
 
-  const handleStatusUpdate = (data) => {
+  const handleStatusUpdate = (data: any) => {
     const updateData = {
       id: semesterId,
       data: {
