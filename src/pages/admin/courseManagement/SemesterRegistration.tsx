@@ -9,6 +9,7 @@ import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import { TResponse } from "../../../types";
 import { semesterStatusOptions } from "../../../constants/semester";
+import { useAddRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagement.api";
 
 const SemesterRegistration = () => {
   const [addSemester] = useAddRegisteredSemesterMutation();
