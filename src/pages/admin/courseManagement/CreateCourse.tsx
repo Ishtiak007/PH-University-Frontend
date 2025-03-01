@@ -4,11 +4,12 @@ import { Button, Col, Flex } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { toast } from "sonner";
 import PHInput from "../../../components/form/PHInput";
+
+import { TResponse } from "../../../types";
 import {
   useAddCourseMutation,
   useGetAllCoursesQuery,
-} from "../../../redux/features/admin/courseManagement";
-import { TResponse } from "../../../types";
+} from "../../../redux/features/admin/courseManagement.api";
 
 const CreateCourse = () => {
   const [createCourse] = useAddCourseMutation();
