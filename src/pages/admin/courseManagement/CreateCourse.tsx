@@ -9,7 +9,10 @@ import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import { TResponse } from "../../../types";
 import { semesterStatusOptions } from "../../../constants/semester";
-import { useAddRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagement.api";
+import {
+  useAddRegisteredSemesterMutation,
+  useGetAllCoursesQuery,
+} from "../../../redux/features/admin/courseManagement.api";
 
 const CreateCourse = () => {
   const [addSemester] = useAddRegisteredSemesterMutation();
@@ -17,9 +20,11 @@ const CreateCourse = () => {
     { name: "sort", value: "year" },
   ]);
 
-  const academicSemesterOptions = academicSemester?.data?.map((item) => ({
+  const { data: courses } = useGetAllCoursesQuery(undefined);
+
+  const preRequisiteCoursesOptions = courses?.data?.map((item) => ({
     value: item._id,
-    label: `${item.name} ${item.year}`,
+    label: item.title,
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -50,23 +55,16 @@ const CreateCourse = () => {
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
-          <PHSelect
-            label="Academic Semester"
-            name="academicSemester"
-            options={academicSemesterOptions}
-          />
-
-          <PHSelect
-            name="status"
-            label="Status"
-            options={semesterStatusOptions}
-          />
-          <PHDatePicker name="startDate" label="Start Date" />
           <PHInput type="text" name="title" label="Title" />
           <PHInput type="text" name="prefix" label="Prefix" />
           <PHInput type="text" name="code" label="Code" />
           <PHInput type="text" name="credits" label="Credits" />
-
+          <PHSelect
+            mode="multiple"
+            options={preRequisiteCoursesOptions}
+            name="preRequisiteCourses"
+            label="preRequisiteCourses"
+          />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
