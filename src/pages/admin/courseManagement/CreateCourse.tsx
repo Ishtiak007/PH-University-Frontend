@@ -2,24 +2,16 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import { Button, Col, Flex } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
-
 import { toast } from "sonner";
-import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
-import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
-import { TResponse } from "../../../types";
-import { semesterStatusOptions } from "../../../constants/semester";
 import {
-  useAddRegisteredSemesterMutation,
+  useAddCourseMutation,
   useGetAllCoursesQuery,
-} from "../../../redux/features/admin/courseManagement.api";
+} from "../../../redux/features/admin/courseManagement";
+import { TResponse } from "../../../types";
 
 const CreateCourse = () => {
-  const [addSemester] = useAddRegisteredSemesterMutation();
-  const { data: academicSemester } = useGetAllSemestersQuery([
-    { name: "sort", value: "year" },
-  ]);
-
+  const [createCourse] = useAddCourseMutation();
   const { data: courses } = useGetAllCoursesQuery(undefined);
 
   const preRequisiteCoursesOptions = courses?.data?.map((item) => ({
@@ -30,16 +22,23 @@ const CreateCourse = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
 
-    const semesterData = {
+    const courseData = {
       ...data,
-      minCredit: Number(data.minCredit),
-      maxCredit: Number(data.maxCredit),
+      code: Number(data.code),
+      credits: Number(data.credits),
+      isDeleted: false,
+      preRequisiteCourses: data.preRequisiteCourses
+        ? data.preRequisiteCourses?.map((item) => ({
+            course: item,
+            isDeleted: false,
+          }))
+        : [],
     };
 
-    console.log(semesterData);
+    console.log(courseData);
 
     try {
-      const res = (await addSemester(semesterData)) as TResponse<any>;
+      const res = (await createCourse(courseData)) as TResponse<any>;
       console.log(res);
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
