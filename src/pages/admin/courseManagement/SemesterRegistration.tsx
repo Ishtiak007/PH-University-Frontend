@@ -7,8 +7,11 @@ import { monthOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { toast } from "sonner";
+import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 
 const SemesterRegistration = () => {
+  const { data: academicSemester } = useGetAllSemestersQuery(undefined);
+  console.log("Data:", academicSemester);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastID = toast.loading("Creating");
 
