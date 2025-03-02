@@ -1,10 +1,12 @@
 import { Layout, Menu } from "antd";
-import { sidebarItemsGenerator } from "../../utils/SidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { facultyPaths } from "../../routes/faculty.routes";
 import { studentPaths } from "../../routes/student.routes";
+
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
 import { useAppSelector } from "../../redux/features/hooks";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { sidebarItemsGenerator } from "../../utils/SidebarItemsGenerator";
 
 const { Sider } = Layout;
 
@@ -15,17 +17,23 @@ const userRole = {
 };
 
 const Sidebar = () => {
-  const user = useAppSelector(selectCurrentUser);
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+
+  if (token) {
+    user = verifyToken(token);
+  }
+
   let sidebarItems;
-  switch (user!.role) {
+
+  switch ((user as TUser)!.role) {
     case userRole.ADMIN:
       sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
       break;
-
     case userRole.FACULTY:
       sidebarItems = sidebarItemsGenerator(facultyPaths, userRole.FACULTY);
       break;
-
     case userRole.STUDENT:
       sidebarItems = sidebarItemsGenerator(studentPaths, userRole.STUDENT);
       break;
@@ -33,6 +41,7 @@ const Sidebar = () => {
     default:
       break;
   }
+
   return (
     <Sider
       breakpoint="lg"
@@ -48,7 +57,7 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1>PH-UniV.</h1>
+        <h1>PH Uni</h1>
       </div>
       <Menu
         theme="dark"
