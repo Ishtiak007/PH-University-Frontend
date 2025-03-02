@@ -13,7 +13,7 @@ import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
 import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemesters";
 import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
-import Courses from "../pages/admin/courseManagement/Course";
+import Courses from "../pages/admin/courseManagement/Courses";
 
 export const adminPaths = [
   {
