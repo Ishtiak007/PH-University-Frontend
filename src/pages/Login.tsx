@@ -14,16 +14,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  // const { register, handleSubmit } = useForm({
-  //   defaultValues: {
-  //     userId: "A-0001",
-  //     password: "admin123",
-  //   },
-  // });
-
   const defaultValues = {
-    userId: "A-0001",
-    password: "admin123",
+    userId: "2026030001",
+    password: "student123",
   };
 
   const [login] = useLoginMutation();
