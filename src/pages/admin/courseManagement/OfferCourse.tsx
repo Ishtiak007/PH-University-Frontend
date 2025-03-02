@@ -26,12 +26,6 @@ const OfferCourse = () => {
             name="academicSemester"
             options={academicSemesterOptions}
           />
-
-          <PHSelect
-            name="status"
-            label="Status"
-            options={semesterStatusOptions}
-          />
           <PHInput name="test" label="Test" type="text"></PHInput>
 
           <Button htmlType="submit">Submit</Button>
