@@ -1,12 +1,13 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
-import PHSelect from "../../../components/form/PHSelect";
-import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import { useGetAcademicDepartmentsQuery } from "../../../redux/features/admin/academicManagement.api";
 import PHSelectWithWatch from "../../../components/form/PHSelectWithWacth";
+import { useState } from "react";
 
 const OfferCourse = () => {
+  const [id, setId] = useState("");
+  console.log("Inside parent", id);
   const { data: academicFacultyData } =
     useGetAcademicDepartmentsQuery(undefined);
 
@@ -23,11 +24,17 @@ const OfferCourse = () => {
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
           <PHSelectWithWatch
+            onValueChange={setId}
             label="Academic Semester"
             name="academicSemester"
             options={academicSemesterOptions}
           />
-          <PHInput name="test" label="Test" type="text"></PHInput>
+          <PHInput
+            disabled={!id}
+            name="test"
+            label="Test"
+            type="text"
+          ></PHInput>
 
           <Button htmlType="submit">Submit</Button>
         </PHForm>
