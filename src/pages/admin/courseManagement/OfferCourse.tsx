@@ -4,6 +4,7 @@ import PHSelect from "../../../components/form/PHSelect";
 import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import { useGetAcademicDepartmentsQuery } from "../../../redux/features/admin/academicManagement.api";
+import PHSelectWithWatch from "../../../components/form/PHSelectWithWacth";
 
 const OfferCourse = () => {
   const { data: academicFacultyData } =
@@ -21,7 +22,7 @@ const OfferCourse = () => {
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
-          <PHSelect
+          <PHSelectWithWatch
             label="Academic Semester"
             name="academicSemester"
             options={academicSemesterOptions}
