@@ -6,9 +6,9 @@ import {
   createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
-import { RootState } from "../features/store";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3000/api/v1",
@@ -32,6 +32,9 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status === 404) {
+    toast.error(result.error.data.message);
+  }
+  if (result?.error?.status === 403) {
     toast.error(result.error.data.message);
   }
   if (result?.error?.status === 401) {
@@ -67,6 +70,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["semester", "courses"],
+  tagTypes: ["semester", "courses", "offeredCourse"],
   endpoints: () => ({}),
 });
