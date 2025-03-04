@@ -27,6 +27,14 @@ const facultyCourseApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    addMark: builder.mutation({
+      query: (data) => ({
+        url: "/enrolled-courses/update-enrolled-course-marks",
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
